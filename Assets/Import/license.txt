@@ -1,0 +1,11 @@
+Model Information:
+* title:	Glass Jar with Marble Lid
+* source:	https://sketchfab.com/3d-models/glass-jar-with-marble-lid-f5383b6b32eb4439b874473b6d52df0c
+* author:	InGameStudio (https://sketchfab.com/ingamestudio)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Glass Jar with Marble Lid" (https://sketchfab.com/3d-models/glass-jar-with-marble-lid-f5383b6b32eb4439b874473b6d52df0c) by InGameStudio (https://sketchfab.com/ingamestudio) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

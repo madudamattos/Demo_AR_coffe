@@ -26,6 +26,8 @@ public class FillSpoon : MonoBehaviour
     private bool isRotated;
     private bool state;
 
+    private bool canDrop = false;
+
     // Scrit de check de variavel
     [SerializeField] ActiveCoffeMesh coffeScript;
 
@@ -33,20 +35,27 @@ public class FillSpoon : MonoBehaviour
     //private ParticleSystem particle;
     //private Rigidbody rb;
 
+    public ParticleSystem coffeParticle;
+    public Transform coffeParticleTransform;
+
     void Start()
     {
-
+        
     }
 
     // A funcao de ativar o cafe na colher é chamada apenas atraves da colisao pelo metodo OnTriggerEnter, portanto nao precisa ser chamada no update.
     // No Update é chamada somente a funcao DropCoffe que verifica constantemente se a colher esta derramando o cafe e chama as ações respectivas para tratar o casos
     void Update()
     {
-
         DropCoffe();
 
     }
 
+    IEnumerator WaitTime()
+    {
+        yield return new WaitForSeconds(1f);
+        canDrop = true;
+    }
 
     // Ativa o cafe da colher quando a colher entra em contato com o cafe no pote
     void OnTriggerEnter(Collider col)
@@ -54,6 +63,7 @@ public class FillSpoon : MonoBehaviour
         if (col.gameObject.tag == "CoffePot")
         {
             SetCoffeOnSpoon(true);
+            StartCoroutine(WaitTime());
         }
     }
 
@@ -83,15 +93,27 @@ public class FillSpoon : MonoBehaviour
             }
 
             // Desativa o café da colher da esponja quando ela esta rotacionada
-            SetCoffeOnSpoon(false);
+            if (canDrop)
+            {
+                SetCoffeOnSpoon(false);
+                ParticleSystem instance = Instantiate(coffeParticle, transform.position + new Vector3(-0.040f, 0, 0.030f), Quaternion.identity);
+                instance.transform.Rotate(90, 0, 0);
+                canDrop = false;
+            }
         }
     }
 
     // Verifica se a colher esta rotacionada o suficiente para derramar o cafe
     bool isSpoonRotated()
     {
-        if(transform.rotation.z < -0.6f || transform.rotation.z > 0.6f)
-        {
+
+        Vector3 upVector = Vector3.up;
+        Vector3 forwardVector = transform.forward * -1;
+
+        float angle = Vector3.Angle(upVector, forwardVector);
+
+        if (angle > 90f)
+        { 
             return true;
         }
 
